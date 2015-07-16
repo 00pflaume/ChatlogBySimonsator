@@ -10,4 +10,4 @@ config:
   Permission1: chatlog.create
   Permission2: chatlog.protectet
   Permission3: chatlog.create.nowait
-  AutoUpdate: false
+  UpdateNotification: false

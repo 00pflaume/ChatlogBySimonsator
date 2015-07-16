@@ -64,7 +64,7 @@ public class main extends JavaPlugin {
 			}
 		}
 		String localVersion = getDescription().getVersion();
-		if(getConfig().getBoolean("config.AutoUpdate")){
+		if(getConfig().getBoolean("config.UpdateNotification")){
 		try {
 			HttpURLConnection con = (HttpURLConnection) new URL("http://www.spigotmc.org/api/general.php")
 					.openConnection();
@@ -87,7 +87,7 @@ public class main extends JavaPlugin {
 		}}
 		else{
 			System.out.println(prefix + "Simonsators Chatlog v." + localVersion + " wurde erfolgreich aktiviert");
-			System.out.println(prefix+"AutoUpdates sind deaktiviert");
+			System.out.println(prefix+"Update Notification ist deaktiviert");
 		}
 	}
 
