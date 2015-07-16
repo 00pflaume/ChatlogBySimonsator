@@ -37,15 +37,30 @@ if (! empty ( $_GET ['time'] ) && ! empty ( $_GET ['zufall'] )) {
 			}
 			if ($Event [$i] == 1) {
 				$Uhr = $wochentag = date ( 'H:i:s', $geschenum [$i] );
+				if($language=="de"){
 				echo $Spieler [$i] . " ist um " . $Uhr . " dem Spiel beigetreten<br>";
+				}
+				else{
+					echo $Spieler [$i] . " joined at " . $Uhr . "<br>";
+				}
 			}
 			if ($Event [$i] == 2) {
 				$Uhr = $wochentag = date ( 'H:i:s', $geschenum [$i] );
+				if($language=="de"){
 				echo $Spieler [$i] . " hat das Spiel um " . $Uhr . " verlassen.<br>";
+				}
+				else{
+					echo $Spieler [$i] . " has left the game at " . $Uhr . ".<br>";
+				}
 			}
 			if ($Event [$i] == 3) {
 				$Uhr = $wochentag = date ( 'H:i:s', $geschenum [$i] );
+				if($language=="de"){
 				echo "Ein Chatlog wurde f&uuml;r den Spieler " . $Inhalt [$i] . " von dem Spieler " . $Spieler [$i] . " um " . $Uhr . " erstellt<br>";
+				}
+				else{
+					echo "A chatlog was created of " . $Inhalt [$i] . " from the player " . $Spieler [$i] . " at " . $Uhr . "<br>";
+				}
 			}
 		}
 	} else {

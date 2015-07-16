@@ -14,4 +14,5 @@ $footer1="<a href='https://example.de' class='footerLink'>&copy;Example.de</a>";
 $footer2="Developer: Simon 'Simonsator' Brungs";
 error_reporting(0);//set to one to get error messages
 date_default_timezone_set ( 'Europe/Berlin' );
+$language="de";//change this to en to set the language to english, anyway you need to change the error messages to the preferd language
 ?>

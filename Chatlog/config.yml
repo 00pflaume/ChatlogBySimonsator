@@ -11,3 +11,4 @@ config:
   Permission2: chatlog.protectet
   Permission3: chatlog.create.nowait
   UpdateNotification: false
+  language: en
