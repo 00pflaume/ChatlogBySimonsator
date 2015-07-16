@@ -1,0 +1,18 @@
+main: chatlog.main.main
+name: Chatlog
+version: 0.9.1
+author: Simonsator
+ 
+commands:
+  chatlog:
+    desciption: Hiermit wird ein Chatlog von einem Spieler erstellt und in eine Datenbank geschrieben
+    usage: /<Kommando> [name des Spielers]
+  rp:
+    desciption: Hiermit wird ein Chatlog von einem Spieler erstellt und in eine Datenbank geschrieben
+    usage: /<Kommando> [name des Spielers]
+  report:
+    desciption: Hiermit wird ein Chatlog von einem Spieler erstellt und in eine Datenbank geschrieben
+    usage: /<Kommando> [name des Spielers]
+  cl:
+    desciption: Hiermit wird ein Chatlog von einem Spieler erstellt und in eine Datenbank geschrieben
+    usage: /<Kommando> [name des Spielers]

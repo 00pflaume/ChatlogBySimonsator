@@ -1,0 +1,13 @@
+config:
+  host: localhost
+  user: root
+  passwort: passwort
+  port: 3306
+  database: Chatlog
+  ServerName: Lobby1
+  ServerType: Game
+  ChatlogLink: http://example.de/chatlog/index.php
+  Permission1: chatlog.create
+  Permission2: chatlog.protectet
+  Permission3: chatlog.create.nowait
+  AutoUpdate: false
