@@ -12,3 +12,16 @@ config:
   Permission3: chatlog.create.nowait
   UpdateNotification: false
   language: en
+  useMessage: false
+messages:
+  linkOutputLobby: §2A chatlog of §e[PLAYER] §2was created, the link is §1§n[LINK]
+  linkOutputGame: §2A chatlog of §e[PLAYER] §2was created, the link is §1§n[LINK]§2. You can use this link, when the round is over.
+  waitError: §cYou can only created every minute a chatlog.
+  CanNotChatlogThisPersonError: §cYou can not create a chatlog of this person.
+  ChatlogHimSelfError: §cYou can not chatlog yourself.
+  playerNotFound: §cThe player §e[PLAYER] §cwas not found
+  errorPlayerForget: §cYou need to name the player, who you want to create a chatlog of
+  errorTooManyArguments: §cOnly from §eONE §cplayer you can create a chatlog at the same time
+  errorMissingPermission: You do not have the permission §4[PERMISSION]
+  functionOfTheCommand: §c/chatlog [playername]
+  

@@ -49,6 +49,10 @@ public class main extends JavaPlugin {
 		Berechtigung2 = getConfig().getString("config.Permission2");
 		Berechtigung3 = getConfig().getString("config.Permission3");
 		language = getConfig().getString("config.language");
+		boolean messagesYml = getConfig().getBoolean("config.useMessage");
+		if (messagesYml) {
+			language = "own";
+		}
 		mySql = new mySql();
 		mySql.setDaten(host, user, passwort, port, database, nameDesServers, serverType);
 		try {
@@ -194,14 +198,23 @@ public class main extends JavaPlugin {
 														+ " has created a chatlog of  " + geChatlogt.getDisplayName()
 														+ ", the link is: " + link);
 											} else {
-												sender.sendMessage(ChatColor.GREEN + "Ein Chatlog von §e"
-														+ geChatlogt.getDisplayName() + ChatColor.GREEN
-														+ " wurde erstellt, der Link ist: " + ChatColor.BLUE
-														+ ChatColor.UNDERLINE + link);
-												System.out.println(prefix + gesendeter.getDisplayName()
-														+ " hat einen Chatlog von dem Spieler "
-														+ geChatlogt.getDisplayName() + " erstellt, der Link ist: "
-														+ link);
+												if (language.equalsIgnoreCase("own")) {
+													sender.sendMessage(getConfig().getString("messages.linkOutputLobby")
+															.replace("[PLAYER]", geChatlogt.getDisplayName())
+															.replace("[LINK]", link));
+													System.out.println(prefix + gesendeter.getDisplayName()
+															+ " has created a chatlog of  "
+															+ geChatlogt.getDisplayName() + ", the link is: " + link);
+												} else {
+													sender.sendMessage(ChatColor.GREEN + "Ein Chatlog von §e"
+															+ geChatlogt.getDisplayName() + ChatColor.GREEN
+															+ " wurde erstellt, der Link ist: " + ChatColor.BLUE
+															+ ChatColor.UNDERLINE + link);
+													System.out.println(prefix + gesendeter.getDisplayName()
+															+ " hat einen Chatlog von dem Spieler "
+															+ geChatlogt.getDisplayName() + " erstellt, der Link ist: "
+															+ link);
+												}
 											}
 											if (sender.hasPermission(Berechtigung3) == false) {
 												used.add(gesendeter.getDisplayName());
@@ -247,16 +260,25 @@ public class main extends JavaPlugin {
 														+ " has created a chatlog of " + geChatlogt.getDisplayName()
 														+ ", the link is: " + link);
 											} else {
-												sender.sendMessage(ChatColor.GREEN + "Ein Chatlog von §e"
-														+ geChatlogt.getDisplayName() + ChatColor.GREEN
-														+ " wurde erstellt, der Link ist: " + ChatColor.BLUE
-														+ ChatColor.UNDERLINE + link + ChatColor.RESET + ChatColor.GREEN
-														+ "."
-														+ " Du kannst den Chatlog aufrufen, sobald die Runde vorbei ist.");
-												System.out.println(prefix + gesendeter.getDisplayName()
-														+ " hat einen Chatlog von dem Spieler "
-														+ geChatlogt.getDisplayName() + " erstellt, der Link ist: "
-														+ link);
+												if (language.equalsIgnoreCase("own")) {
+													sender.sendMessage(getConfig().getString("messages.linkOutputGame")
+															.replace("[PLAYER]", geChatlogt.getDisplayName())
+															.replace("[LINK]", link));
+													System.out.println(prefix + gesendeter.getDisplayName()
+															+ " has created a chatlog of " + geChatlogt.getDisplayName()
+															+ ", the link is: " + link);
+												} else {
+													sender.sendMessage(ChatColor.GREEN + "Ein Chatlog von §e"
+															+ geChatlogt.getDisplayName() + ChatColor.GREEN
+															+ " wurde erstellt, der Link ist: " + ChatColor.BLUE
+															+ ChatColor.UNDERLINE + link + ChatColor.RESET
+															+ ChatColor.GREEN + "."
+															+ " Du kannst den Chatlog aufrufen, sobald die Runde vorbei ist.");
+													System.out.println(prefix + gesendeter.getDisplayName()
+															+ " hat einen Chatlog von dem Spieler "
+															+ geChatlogt.getDisplayName() + " erstellt, der Link ist: "
+															+ link);
+												}
 											}
 											if (jetzterstellt == true) {
 												Object newArray = Array.newInstance(task.getClass().getComponentType(),
@@ -286,27 +308,43 @@ public class main extends JavaPlugin {
 											System.out.println(prefix + gesendeter.getDisplayName()
 													+ " needs to wait one minute, until he can chatlog again.");
 										} else {
-											sender.sendMessage(ChatColor.RED
-													+ "Du darfst nur jede Minute einen Chatlog erstellen.");
-											System.out.println(prefix + gesendeter.getDisplayName()
-													+ " muss noch eine Minute warten, bis er wieder Chatlogen darf.");
+											if (language.equalsIgnoreCase("own")) {
+												sender.sendMessage(getConfig().getString("messages.waitError"));
+												System.out.println(prefix + gesendeter.getDisplayName()
+														+ " needs to wait one minute, until he can chatlog again.");
+											} else {
+												sender.sendMessage(ChatColor.RED
+														+ "Du darfst nur jede Minute einen Chatlog erstellen.");
+												System.out.println(prefix + gesendeter.getDisplayName()
+														+ " muss noch eine Minute warten, bis er wieder Chatlogen darf.");
+											}
 										}
 										return true;
 									}
 								} else {
 									if (language.equalsIgnoreCase("en")) {
 										sender.sendMessage(
-												ChatColor.RED + "You can not creat a chatlog of this person.");
+												ChatColor.RED + "You can not create a chatlog of this person.");
 										System.out.println(prefix + gesendeter.getDisplayName()
 												+ " tried to create a chatlog of " + geChatlogt.getDisplayName()
 												+ ", but  " + geChatlogt.getDisplayName()
 												+ " is not allowed to be chatloged.");
 									} else {
-										sender.sendMessage(ChatColor.RED
-												+ "Du darfst von diesem Spieler keinen Chatlog erstellen.");
-										System.out.println(prefix + gesendeter.getDisplayName() + " hat versucht von "
-												+ geChatlogt.getDisplayName() + " zu erstellen, jedoch darf "
-												+ geChatlogt.getDisplayName() + " nicht gechatlogt werden.");
+										if (language.equalsIgnoreCase("own")) {
+											sender.sendMessage(
+													getConfig().getString("messages.CanNotChatlogThisPersonError"));
+											System.out.println(prefix + gesendeter.getDisplayName()
+													+ " tried to create a chatlog of " + geChatlogt.getDisplayName()
+													+ ", but  " + geChatlogt.getDisplayName()
+													+ " is not allowed to be chatloged.");
+										} else {
+											sender.sendMessage(ChatColor.RED
+													+ "Du darfst von diesem Spieler keinen Chatlog erstellen.");
+											System.out.println(prefix + gesendeter.getDisplayName()
+													+ " hat versucht von " + geChatlogt.getDisplayName()
+													+ " zu erstellen, jedoch darf " + geChatlogt.getDisplayName()
+													+ " nicht gechatlogt werden.");
+										}
 									}
 									return true;
 								}
@@ -317,10 +355,17 @@ public class main extends JavaPlugin {
 											+ " tried to create a chatlog of his own.");
 									sender.sendMessage("§c/chatlog [playername]");
 								} else {
-									sender.sendMessage(ChatColor.RED + "Du kannst dich nicht selber chatlogen");
-									System.out.println(prefix + gesendeter.getDisplayName()
-											+ " hat versucht einen Chatlog von sich selbst zu erstellen.");
-									sender.sendMessage("§c/chatlog [Spielername]");
+									if (language.equalsIgnoreCase("own")) {
+										sender.sendMessage(getConfig().getString("messages.ChatlogHimSelfError"));
+										System.out.println(prefix + gesendeter.getDisplayName()
+												+ " tried to create a chatlog of his own.");
+										sender.sendMessage(getConfig().getString("messages.functionOfTheCommand"));
+									} else {
+										sender.sendMessage(ChatColor.RED + "Du kannst dich nicht selber chatlogen");
+										System.out.println(prefix + gesendeter.getDisplayName()
+												+ " hat versucht einen Chatlog von sich selbst zu erstellen.");
+										sender.sendMessage("§c/chatlog [Spielername]");
+									}
 								}
 								return true;
 							}
@@ -330,9 +375,17 @@ public class main extends JavaPlugin {
 								System.out.println(prefix + "The player " + zuChatlogen[0] + " was not found.");
 								sender.sendMessage("§c/chatlog [playername]");
 							} else {
-								sender.sendMessage("§cDer Spieler §e" + zuChatlogen[0] + "§c wurde nicht gefunden");
-								System.out.println(prefix + "Der Spieler " + zuChatlogen[0] + " wurde nicht gefunden.");
-								sender.sendMessage("§c/chatlog [Spielername]");
+								if (language.equalsIgnoreCase("own")) {
+									sender.sendMessage(getConfig().getString("messages.playerNotFound")
+											.replace("[PLAYER]", zuChatlogen[0]));
+									System.out.println(prefix + "The player " + zuChatlogen[0] + " was not found.");
+									sender.sendMessage(getConfig().getString("messages.functionOfTheCommand"));
+								} else {
+									sender.sendMessage("§cDer Spieler §e" + zuChatlogen[0] + "§c wurde nicht gefunden");
+									System.out.println(
+											prefix + "Der Spieler " + zuChatlogen[0] + " wurde nicht gefunden.");
+									sender.sendMessage("§c/chatlog [Spielername]");
+								}
 							}
 							return true;
 						}
@@ -344,11 +397,18 @@ public class main extends JavaPlugin {
 								System.out.println(prefix + gesendeter.getDisplayName() + "A player must be namend");
 								sender.sendMessage("§c/chatlog [playername]");
 							} else {
-								sender.sendMessage(
-										"§cDu musst einen Spieler angeben, von dem du einen Chatlog erstellen möchtest");
-								System.out.println(
-										prefix + gesendeter.getDisplayName() + "Es muss ein Spieler angegeben werden");
-								sender.sendMessage("§c/chatlog [Spielername]");
+								if (language.equalsIgnoreCase("own")) {
+									sender.sendMessage(getConfig().getString("messages.errorPlayerForget"));
+									System.out
+											.println(prefix + gesendeter.getDisplayName() + "A player must be namend");
+									sender.sendMessage(getConfig().getString("messages.functionOfTheCommand"));
+								} else {
+									sender.sendMessage(
+											"§cDu musst einen Spieler angeben, von dem du einen Chatlog erstellen möchtest");
+									System.out.println(prefix + gesendeter.getDisplayName()
+											+ "Es muss ein Spieler angegeben werden");
+									sender.sendMessage("§c/chatlog [Spielername]");
+								}
 							}
 							return true;
 						} else {
@@ -359,11 +419,18 @@ public class main extends JavaPlugin {
 										prefix + "Only of one player at the same time can a chatlog be created");
 								sender.sendMessage("§c/chatlog [playername]");
 							} else {
-								sender.sendMessage(
-										"§cEs darf nur von §eEINEM §cSpieler gleichzeitig ein Chatlog erstellt werden");
-								System.out.println(
-										prefix + "Es darf nur ein Spieler Spieler auf einmal gechatlogt werden");
-								sender.sendMessage("§c/chatlog [Spielername]");
+								if (language.equalsIgnoreCase("own")) {
+									sender.sendMessage(getConfig().getString("messages.errorTooManyArguments"));
+									System.out.println(
+											prefix + "Only of one player at the same time can a chatlog be created");
+									sender.sendMessage(getConfig().getString("messages.functionOfTheCommand"));
+								} else {
+									sender.sendMessage(
+											"§cEs darf nur von §eEINEM §cSpieler gleichzeitig ein Chatlog erstellt werden");
+									System.out.println(
+											prefix + "Es darf nur ein Spieler Spieler auf einmal gechatlogt werden");
+									sender.sendMessage("§c/chatlog [Spielername]");
+								}
 							}
 							return true;
 						}
@@ -375,11 +442,18 @@ public class main extends JavaPlugin {
 						System.out.println(prefix + gesendeter.getDisplayName()
 								+ " did not have the right permissions. He needs the permission " + Berechtigung1);
 					} else {
-						sender.sendMessage(
-								ChatColor.RED + "Dir fehlt die Permission: " + ChatColor.DARK_RED + Berechtigung1);
-						System.out.println(prefix + gesendeter.getDisplayName()
-								+ " hatte nicht die Notwendigen Permissions einen Chatlog zu erstellen. Er braucht die Permission "
-								+ Berechtigung1);
+						if (language.equalsIgnoreCase("own")) {
+							sender.sendMessage(getConfig().getString("messages.errorMissingPermission")
+									.replace("[PERMISSION]", "Berechtigung1"));
+							System.out.println(prefix + gesendeter.getDisplayName()
+									+ " did not have the right permissions. He needs the permission " + Berechtigung1);
+						} else {
+							sender.sendMessage(
+									ChatColor.RED + "Dir fehlt die Permission: " + ChatColor.DARK_RED + Berechtigung1);
+							System.out.println(prefix + gesendeter.getDisplayName()
+									+ " hatte nicht die Notwendigen Permissions einen Chatlog zu erstellen. Er braucht die Permission "
+									+ Berechtigung1);
+						}
 					}
 					return true;
 				}
@@ -396,6 +470,10 @@ public class main extends JavaPlugin {
 			if (language.equalsIgnoreCase("en")) {
 				sender.sendMessage("§c/chatlog [playername]");
 			} else {
+				if (language.equalsIgnoreCase("own")) {
+					sender.sendMessage(getConfig().getString("messages.functionOfTheCommand"));
+					return true;
+				}
 				sender.sendMessage("§c/chatlog [Spielername]");
 			}
 			return true;
