@@ -16,7 +16,12 @@ if (! empty ( $_GET ['time'] ) && ! empty ( $_GET ['zufall'] )) {
 	if ($gefunden == true) {
 		$datum = $wochentag = date ( 'j.m.Y', $zeit );
 		$Uhrzeit = $wochentag = date ( 'H', $zeit );
+		if($language=="de"){
 		echo "<h1 class='ueberschrifft'>Chatlog von " . $User . " vom " . $datum . " um " . $Uhrzeit . " Uhr auf dem Server ".$Server."</h1>";
+		}
+		else{
+			echo "<h1 class='ueberschrifft'>Chatlog of " . $User . " on the " . $datum . " at " . $Uhrzeit . " On the server ".$Server."</h1>";
+		}
 		?>
 		<div class="eigentlicherChatlog">
 		<?php

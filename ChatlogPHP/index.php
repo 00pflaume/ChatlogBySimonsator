@@ -1,7 +1,7 @@
 <?php
+require "config.php";
 mysql_query ( "SET NAMES 'utf8'" );
 header('Content-Type: text/html; charset=utf-8');
-require "config.php";
 ?>
 <html style="min-height: 100%">
 <head>
@@ -19,8 +19,8 @@ background-color: <?php echo $color;?>;
 		<nav class="navbar navbar-inverse navbar-static-top ng-scope"
 			id="site-nav" role="navigation">
 			<div class="container">
-				<div>
-					<a class="navbar-brand" href="<?php echo $url;?>"><img
+				<div align="center">
+					<a class="navbar-brand" href="<?php echo $url;?>" ><img
 						src="<?php echo $title_image_url;?>"
 						width="310" alt="<?php echo $title_header_text;?>" class="logo"> 
 				</a>

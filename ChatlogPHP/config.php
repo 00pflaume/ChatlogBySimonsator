@@ -1,5 +1,5 @@
 <?php
-mysql_connect ( 'localhost:3306', 'root', 'usbw' );
+mysql_connect ( 'localhost:3306', 'root', 'password' );
 mysql_select_db ( "chatlog" );
 $url="https://example.de";
 $title_page="Example.de - Chatlog";//title of the Page
